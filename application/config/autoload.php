@@ -37,7 +37,7 @@
 |
 */
 
-$autoload['packages'] = array();
+$autoload['packages'] = array(APPPATH.'third_party');
 
 
 /*
@@ -50,9 +50,13 @@ $autoload['packages'] = array();
 | Prototype:
 |
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
+ * WE WILL NEED XMLRPC in the future for iphone/android or even standalone apps, but not now.
 */
 
-$autoload['libraries'] = array();
+//$autoload['libraries'] = array();
+$autoload['libraries'] = array('database', 'session', 'core/MY_DB', 'core/Main', 'core/Ajax');
+// always put Core last as it performs actions
+$autoload['libraries'][] = 'core/Core';
 
 
 /*
@@ -64,7 +68,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array();
+$autoload['helper'] = array('exceptions', 'ajax', 'common');
 
 
 /*
@@ -109,7 +113,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array();
+$autoload['model'] = array('user');
 
 
 /* End of file autoload.php */
