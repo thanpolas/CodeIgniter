@@ -44,7 +44,6 @@ if (PRODUCTION):
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', '<?= $this->config->item('GA_property_id'); ?>']);
 	_gaq.push(['_trackPageview']);
-	
 	_gaq.push(['_setCustomVar', 1, 'userAuthed', '<?=($this->user->isAuthed() ? 'true' : 'false');?>',2]);
 <?php
 	// check if this visitor comes from a campaign and we have to notify GA

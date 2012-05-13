@@ -7,7 +7,7 @@ if (DEVEL):
 <script src="/jsc/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="/js/closure-library/closure/goog/base.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/deps.js" charset="utf-8"></script>
-<script type="text/javascript" src="/js/web/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/init.js" charset="utf-8"></script>
 <?php else: ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/jsc/v/main_<?php echo PRODCOUNTER; ?>.js" charset="utf-8"></script>

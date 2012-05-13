@@ -31,6 +31,8 @@ echo 'AB Test name:' . $abString . ' Version #' . $abVersion;
 		<br />
 		<span>Create any type of tag for logout. It must contain the css class <a href="#" class="-logout">-logout</a> so we can bind on it</span>
 	</div>
+	<select id="comboBox"></select>
+	<div id="showObjects"></div>
 	<div id="auth_state">
 		<h2>Auth State</h2>
 		<h3>Not Authed</h3>

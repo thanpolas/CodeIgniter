@@ -152,7 +152,7 @@ class Main {
     if ($opt_framed) {
       $out .= 'window.top.window.';
     }
-    $out.= 'web.system.tagLander(params);';
+    $out.= 'ss.web.system.tagLander(params);';
     //close anon func and script tag
     $out .= '})();</script>';
 
