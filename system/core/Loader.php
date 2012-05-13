@@ -508,7 +508,7 @@ class CI_Loader {
 
 				if ( ! file_exists($base_helper))
 				{
-					show_error('Unable to load the requested file: helpers/'.$helper.'.php');
+					show_error('Unable to load the requested file: helpers/'.$helper.'.php fullpath:' . $base_helper);
 				}
 
 				include_once($ext_helper);
@@ -535,7 +535,7 @@ class CI_Loader {
 			// unable to load the helper
 			if ( ! isset($this->_ci_helpers[$helper]))
 			{
-				show_error('Unable to load the requested file: helpers/'.$helper.'.php');
+				show_error('Unable to load the requested file2: helpers/'.$helper.'.php');
 			}
 		}
 	}
