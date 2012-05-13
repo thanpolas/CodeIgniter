@@ -535,7 +535,7 @@ class CI_Loader {
 			// unable to load the helper
 			if ( ! isset($this->_ci_helpers[$helper]))
 			{
-				show_error('Unable to load the requested file2: helpers/'.$helper.'.php');
+				show_error('Unable to load the requested file2: helpers/'.$helper.'.php ext_helper:' . $ext_helper);
 			}
 		}
 	}
