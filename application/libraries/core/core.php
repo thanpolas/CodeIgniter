@@ -267,7 +267,6 @@ try {
   }
 
 } catch (Exception $e) {
-echo	debug_r($e);
   raise_error($e->getMessage());
 }
 
