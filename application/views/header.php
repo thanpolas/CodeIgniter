@@ -32,7 +32,7 @@ $this->load->config('facebook');
 			else:
 			// if in production mode then we only load the one compiled css file
 ?>
-<link rel="stylesheet" type="text/css" href="/cssc/v/main1_<?php echo PRODCOUNTER;?>.css" />
+<link rel="stylesheet" type="text/css" href="/cssc/v/main_<?php echo PRODCOUNTER;?>.css" />
     <?php endif; 
 if (PRODUCTION):
 	// if in production then use our GA script
