@@ -1,5 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Force loading of compiled JS file when in DEVEL mode
+ * Ignores the production counter and instead loads the file
+ * jsc/compiled.js
+ */
+$config['load_compiled_js'] = true;
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
