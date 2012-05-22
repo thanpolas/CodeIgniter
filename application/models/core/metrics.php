@@ -40,13 +40,6 @@ class Metrics extends CI_Model {
   /**
    * A generic counter for any type of events we may want to track
    *
-   * e.g.
-   * $this->metrics->trackCounter('Invite', 'twitter', '', '', 'BOOTH_NAME', 'BOOTH_ID');
-   * $this->metrics->trackCounter('Invite', 'facebook', 'clicked', '', 'BOOTH_NAME', 'BOOTH_ID');
-   * $this->metrics->trackCounter('Invite', 'facebook', 'shared', 'FB-SHARE-ID', 'BOOTH_NAME', 'BOOTH_ID');
-   *
-   * $this->metrics->trackCounter('auth', 'login', 'SOURCE_ID');
-   * $this->metrics->trackCounter('booths', 'joins', 'BOOTH_NAME', 'BOOTH_ID', 'TOTAL_USERS_IN_BOOTH');
    *
    * The parameters are mostly arbitrary, use at your own convenience
    *
