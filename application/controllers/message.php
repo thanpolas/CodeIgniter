@@ -1,19 +1,21 @@
 <?php
 
 /**
- *  @copyright  (C) 2000-2011 Thanasis Polychronakis - All Rights Reserved
- *  @author Thanasis Polychronakis <thanasisp@gmail.com>
- *
- * ********
- * This program is bound to the license agreement that can be found in the root
- * folder of this project. This Agreement does not give you any intellectual property
- * rights in the program. It does not Grand you permission to copy, distribute, redistribute
- * or make any possible use of this program, this is a private work intended for private use.
- *
- * You should have received a copy of the License Agreement along with this program
- * If not, write to: Plastikopiitiki S.A., Attn: Thanasis Polychronakis, P.O. Box 60374,
- * Zip 57001, Thermi, Greece
- *
+* Copyright 2000-2011 Athanasios Polychronakis. All Rights Reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS-IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+* 
+* @author Athanasios Polychronakis <thanpolas@gmail.com>
  *
  * ********
  * created on Jun 27, 2011

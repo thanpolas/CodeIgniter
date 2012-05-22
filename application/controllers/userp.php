@@ -15,11 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * 
- * @copyright  (C) 2000-2010 Athanasios Polychronakis - All Rights Reserved
  * @author Athanasios Polychronakis <thanpolas@gmail.com>
- *
- *
  *
  * ********
  * created on Sep 8, 2011
@@ -44,8 +40,8 @@ class userp extends CI_Controller {
   }
 
   /**
-   * Apublic method to get public user data objects
-   * based on nickname (?) for now?...
+   * A public method to get public user data objects
+   * based on nickname
    *
    *
    * @param string $nickname
@@ -77,5 +73,3 @@ class userp extends CI_Controller {
 
   }
 }
-
-?>

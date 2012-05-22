@@ -5,7 +5,7 @@
  * Ignores the production counter and instead loads the file
  * jsc/compiled.js
  */
-$config['load_compiled_js'] = true;
+$config['load_compiled_js'] = false;
 
 
 /*

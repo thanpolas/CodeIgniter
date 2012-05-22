@@ -75,7 +75,7 @@ require __DIR_PROJECT_ROOT . '/engine/bin/99.prodcounter_do_not_run.php';
      * Define sources
      *
      * Sources represent external web integrations
-     * and Authentication autoritative sources
+     * and Authentication authoritative sources
      *
      */
     define ('SOURCE_WEB', 1);
@@ -150,9 +150,16 @@ try {
 
   }
 
-
-
-
+	// Metrics pass
+	// pass metrics config to client
+	$ci->load->config('analytics');
+	$ci->main->JsPass('analytics', array(
+		'GA_enable' => $ci->config->item('GA_enable'),
+		'GA_property_id' => $ci->config->item('GA_property_id'),
+		'GA_enable_CV_auth' => $ci->config->item('GA_enable_CV_auth'),
+		'GA_enable_CV_auth_params' => $ci->config->item('GA_enable_CV_auth_params'),
+		'MP_enable' => $ci->config->item('MP_enable')
+	));
 
   // set global var 'For first time' to declare that user is here for first time ever
   $isFirstTime = false;

@@ -10,7 +10,7 @@ if (DEVEL && !$this->config->item('load_compiled_js')):
 <script type="text/javascript" src="/js/deps.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/init.js" charset="utf-8"></script>
 <?php elseif (DEVEL && $this->config->item('load_compiled_js')): ?>
-	<script type="text/javascript" src="/js/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="/js/third-party/jquery-1.7.1.js"></script>
 	<script type="text/javascript" src="/jsc/compiled.js" charset="utf-8"></script>
 <?php else: ?>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

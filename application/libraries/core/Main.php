@@ -95,7 +95,7 @@ class Main {
    * 122 : ...
    *
    *
-   * @param int $action The pass action
+   * @param string $action The pass action
    * @param array $array_obj[optiona] However deep array you wish
    * @param boolean $opt_reset [optiona] If we need to reset the cache of jspass
    * @return void
@@ -133,15 +133,9 @@ class Main {
     $out = '<script type="text/javascript">(function(){';
     $out .= 'var params = [';
 
-
-    //debug_r($this->JsPassArray);
-    //echo " JS COUNT: " . count($this->JsPassArray) . "";
-    //debug_r(array_keys($this->JsPassArray));
-    //print_r(self::$JsPassArray);
-
     foreach ($this->JsPassArray as $k => $val) {
       $json = $this->ci->ajax->GetResult($val, 'json');
-      $out .= '{"action":' . $k . ',"obj":' . $json . '},';
+      $out .= '{"action":"' . $k . '","obj":' . $json . '},';
 
       //echo "\n\n Key: $k val: $val json: $json \n\n";
     } // foreach

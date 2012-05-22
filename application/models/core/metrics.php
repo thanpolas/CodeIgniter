@@ -16,7 +16,6 @@
  * limitations under the License.
  * 
  * 
- * @copyright  (C) 2000-2010 Athanasios Polychronakis - All Rights Reserved
  * @author Athanasios Polychronakis <thanpolas@gmail.com>
  *
  *
@@ -31,12 +30,11 @@ if (!defined('BASEPATH'))
 
 
 
-class Metrics {
+class Metrics extends CI_Model {
 
-  private $CI;
 
   function __construct() {
-    $this->CI = & get_instance();
+    parent::__construct();
   }
 
   /**
@@ -64,10 +62,10 @@ class Metrics {
 
     // we do not perform any validations, these are internal methods
     $insert = array (
-        'userId' => $this->CI->user->getID(),
-        'permId' => $this->CI->PERMID,
-        'nickname' => $this->CI->user->getNickname(),
-        'userIPaddress' => $this->CI->input->ip_address(),
+        'userId' => $this->user->getID(),
+        'permId' => $this->PERMID,
+        'nickname' => $this->user->getNickname(),
+        'userIPaddress' => $this->input->ip_address(),
         'category' => $category,
         'action' => $action,
         'label' => $opt_label,
@@ -77,14 +75,12 @@ class Metrics {
         'value_4' => $opt_value4
     );
     // set time to now
-    $this->CI->db->set('createDateTime', 'now()', false);
+    $this->db->set('createDateTime', 'now()', false);
     // and insert...
-    $this->CI->db->insert('metrics_counters', $insert);
+    $this->db->insert('metrics_counters', $insert);
 
   // method trackCounter
   }
 
 // class Metrics
 }
-
-?>
