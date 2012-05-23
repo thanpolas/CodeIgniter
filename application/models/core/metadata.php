@@ -209,5 +209,3 @@ class metadata extends CI_Model {
     return $this->metadataObject;
   }
 }
-
-?>

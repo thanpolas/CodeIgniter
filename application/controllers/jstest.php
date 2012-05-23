@@ -30,6 +30,10 @@
  * @author Thanasis Polychronakis <thanpolas@gmail.com>
  */
 class jstest extends CI_Controller {
+	const TESTPATH = '/js-test/tests/';
+	private $allTests = array(
+		'helpers.js'
+	);
 
   /**
    * Constructor - Access Codeigniter's controller object
@@ -41,6 +45,9 @@ class jstest extends CI_Controller {
   }
 
 	function index() {
-		$this->load->view('js-test.php', array());
+		$this->load->view('js-test.php', array(
+			'testsPath' => self::TESTPATH, 
+			'allTests' => $this->allTests
+		));
 	}
 }
