@@ -56,7 +56,7 @@ $autoload['packages'] = array(APPPATH.'third_party');
 //$autoload['libraries'] = array();
 $autoload['libraries'] = array('database', 'session', 'core/MY_DB', 'core/Main', 'core/Ajax');
 // always put Core last as it performs actions
-$autoload['libraries'][] = 'core/Core';
+$autoload['libraries'][] = 'core/SSCore';
 
 
 /*

@@ -73,7 +73,7 @@ class Users extends CI_Controller {
     // check if perm cookie exists
     $cook = $this->input->cookie($this->config->item('perm_cookiename'));
     if (is_string($cook)) {
-      die_json(array('status' => 10));
+      die_json(array('status' => false));
     }
 
     // create and get the permcook data object
@@ -97,7 +97,7 @@ class Users extends CI_Controller {
 
     // now update the metadata object and send it to the client
     $this->load->model('core/metadata');
-    $md = $this->metadata->updateData();
+    $md = $this->metadata->updateData(array('isFirstTime' => true));
 
     // all done
     die_json(array('status' => 10, 'metadataObject' => $md));
@@ -133,18 +133,8 @@ class Users extends CI_Controller {
 
     $this->load->library('core/User/fb');
 
-
-    //$sessData = $this->session->userdata('sessionData');
-
-
-    //die(debug_r($this->fb->loadUserObject()));
-
-
-
     if (!$this->fb->is_connected()) {
       raise_error('Failed to login to FB. Please retry');
-      //redirect($this->fb->login_url(current_url()));
-      //echo 'not connected';
     }
 
     // we are connected, get FB user data object

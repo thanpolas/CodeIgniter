@@ -214,7 +214,7 @@ class Userperm extends CI_Model {
     $CI = & get_instance();
     $CI->PERMID = $cd['permId'];
     $sd = $this->session->userdata('sessionData');
-    $this->load->library('core/metrics');
+    $this->load->model('core/metrics');
     $this->metrics->trackCounter('visit', $sd['referrer'], '-');
 
 

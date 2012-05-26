@@ -25,7 +25,23 @@
  */
 
 // make CI happy with a class declaration
-class Core {}
+class SSCore {
+	private static $_isFirstTime = false;
+	
+	/**
+	 * Get or set is first time visitor (new session)
+	 *
+	 * @param boolean $setValue [optional]
+	 * @return boolean
+	 */
+	public static function isFirstTime($setValue = null)
+	{
+		if (is_null($setValue))
+			return self::$_isFirstTime;
+			
+		self::$_isFirstTime = $setValue;
+	}
+}
 
 
 
@@ -34,11 +50,6 @@ log_message('info', 'core library starting...');
 
 
 $ci = & get_instance();
-
-
-
-
-
 
 // Set global variables and prepare environment
 // set the current working environment, wrap around CI's
@@ -168,7 +179,7 @@ try {
   if (!$ci->session->userdata('sessionOpened')) {
     //no session, create needed data
     $isFirstTime = true;
-
+		SSCore::isFirstTime(true);
     // load User Agent class
     $ci->load->library('user_agent');
     $sessData = array (
@@ -183,8 +194,6 @@ try {
     if (!$ci->agent->is_robot()) {
       $ci->load->model('core/userperm');
       $sessData['permData'] = $ci->userperm->newVisitor();
-
-
     } else {
       $sessData['permData'] = array(
           'permId' => 0
@@ -242,16 +251,6 @@ try {
   // set the permanent ID to it's global var
   $ci->PERMID = $sessData['permData']['permId'];
 
-  // pass the metadata object...
-  $ci->load->model('core/metadata');
-  $ci->main->JsPass(56, $ci->metadata->getMetadata());
-
-
-
-
-
-
-
   // check if user has landed here via e-mail
   $mailLand = $ci->session->userdata('mailLand');
 
@@ -273,9 +272,11 @@ try {
     }
   }
 
+  // pass the metadata object...
+  $ci->load->model('core/metadata');
+	$ci->metadata->JsPass();
+
+
 } catch (Exception $e) {
   raise_error($e->getMessage());
 }
-
-
-?>

@@ -56,7 +56,7 @@
  * so we can load the user's metadata object on the first page load....
  *
  *
- * @author Thanasis Polychronakis <thanasisp@gmail.com>
+ * @author Thanasis Polychronakis <thanpolas@gmail.com>
  */
 class metadata extends CI_Model {
 
@@ -73,19 +73,19 @@ class metadata extends CI_Model {
    * This is about the perm cook table, the way to tell them apart
    * is with the 'source' key which has a value of 'perm' or 'user'
    *
-   * @var string
+   * @var array
    */
-  private $metadata = '';
+  private $metadata = array();
 
   /**
-   * This is the actual data object that we send to the client
+   * This is the metadata root data object that we send to the client
    *
    * The schema for this object can be seen in the local var
-   * $this->metadataObjectSource
+   * $this->metadataRootSource
    *
    * @var array
    */
-  private $metadataObject = array();
+  private $metadataRoot = array();
 
   /**
    * The schema of the metadata data object we sent.
@@ -95,11 +95,12 @@ class metadata extends CI_Model {
    *
    * @var array
    */
-  private $metadataObjectSource = array(
+  private $metadataRootSource = array(
       'source' => '', // one of 'perm' or 'user'
       'permId' => 0,
       'createDate' => '',
       'visitCounter' => 0,
+			'isFirstTime' => false,
       'metadata' => ''
   );
 
@@ -113,7 +114,7 @@ class metadata extends CI_Model {
    *
    *
    * @param string $metadata JSON encoded string
-   * @return array metadataObject
+   * @return array metadataRoot
    */
   public function save($metadata)
   {
@@ -135,6 +136,19 @@ class metadata extends CI_Model {
     return $this->updateData($metadata);
   }
 
+	/**
+	 * Pass to JS the metadata object
+	 * We check if we have a metadata to pass or void the action
+	 *
+	 * @return void
+	 */
+	public function JsPass()
+	{
+			$metadataRoot = $this->getMetadata();
+			if ($metadata['permId'])
+		  	$this->main->JsPass('metadataRoot', $metadataRoot);
+	}
+
   /**
    * Return the metadata
    *
@@ -146,15 +160,14 @@ class metadata extends CI_Model {
    */
   public function getMetadata()
   {
-
     // first check if we already have the metadataObject stored
-    if (count($this->metadataObject))
-      return $this->metadataObject;
+    if (count($this->metadataRoot))
+      return $this->metadataRoot;
 
     // next up check if we have value stored in our session
-    $this->metadataObject = $this->session->userdata('metadataObject');
-    if (count($this->metadataObject) && is_array($this->metadataObject))
-      return $this->metadataObject;
+    $this->metadataRoot = $this->session->userdata('metadataRoot');
+    if (count($this->metadataRoot) && is_array($this->metadataRoot))
+      return $this->metadataRoot;
 
     if ($this->user->isAuthed()) {
       $this->metadata = $this->user->getUserMetadata();
@@ -167,14 +180,14 @@ class metadata extends CI_Model {
   }
 
   /**
-   * Update the metadataObject with the new metadata
+   * Update the metadataRoot with new metadata
    *
-   * Re-compile it (the metadataObject) and store it in our session
+   * Re-compile it (the metadataRoot) and store it in our session
    *
-   * @param string $metadata [optinal] user's JSON metadata string
-   * @return array (metadataObject)
+   * @param array|string $metadata [optional] visitor's metadata 
+   * @return array (metadataRoot)
    */
-  public function updateData($metadata = '')
+  public function updateData($metadata = array())
   {
     $this->metadata = $metadata;
 
@@ -196,16 +209,17 @@ class metadata extends CI_Model {
 
     // cool, we got whatever we got... compile the data object, store and
     // return it
-    $this->metadataObject = $this->metadataObjectSource;
-    $this->metadataObject['source'] = $source;
-    $this->metadataObject['permId'] = $this->PERMID;
-    $this->metadataObject['createDate'] = $createDate;
-    $this->metadataObject['visitCounter'] = $visitCounter;
-    $this->metadataObject['metadata'] = $this->metadata;
+    $this->metadataRoot = $this->metadataRootPrototype;
+    $this->metadataRoot['source'] = $source;
+    $this->metadataRoot['permId'] = $this->PERMID;
+    $this->metadataRoot['createDate'] = $createDate;
+    $this->metadataRoot['visitCounter'] = $visitCounter;
+		$this->metadataRoot['isFirstTime'] = SSCore::isFirstTime();
+    $this->metadataRoot['metadata'] = $this->metadata;
 
 
-    $this->session->set_userdata('metadataObject', $this->metadataObject);
+    $this->session->set_userdata('metadataRoot', $this->metadataRoot);
 
-    return $this->metadataObject;
+    return $this->metadataRoot;
   }
 }

@@ -1383,7 +1383,7 @@ class User extends CI_Model {
     $this->userData['metadataObject'] = $this->metadata->updateData($this->userData['metadata']);
 
     // save the metrics
-    $this->load->library('core/metrics');
+    $this->load->model('core/metrics');
     $this->metrics->trackCounter('auth', 'login', $sourceId);
 
     // save the session
@@ -1404,7 +1404,7 @@ class User extends CI_Model {
   public function logout ()
   {
     // save the metrics
-    $this->load->library('core/metrics');
+    $this->load->model('core/metrics');
     $this->metrics->trackCounter('auth', 'logout');
     // reset session data
     $this->session->set_userdata('isAuthed', false);
