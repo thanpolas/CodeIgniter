@@ -118,7 +118,7 @@ class Users extends CI_Controller {
 
     //Look for errors from previous steps
     $error = $this->session->flashdata('register_error');
-    $this->load->view('users/login', array('fb' => $this->fb, 'twitter' => $this->tweet, 'error' => $error));
+    $this->load->view('ss/users/login', array('fb' => $this->fb, 'twitter' => $this->tweet, 'error' => $error));
   }
 
 

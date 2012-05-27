@@ -95,7 +95,7 @@ class metadata extends CI_Model {
    *
    * @var array
    */
-  private $metadataRootSource = array(
+  private $metadataRootPrototype = array(
       'source' => '', // one of 'perm' or 'user'
       'permId' => 0,
       'createDate' => '',
@@ -145,7 +145,7 @@ class metadata extends CI_Model {
 	public function JsPass()
 	{
 			$metadataRoot = $this->getMetadata();
-			if ($metadata['permId'])
+			if ($metadataRoot['permId'])
 		  	$this->main->JsPass('metadataRoot', $metadataRoot);
 	}
 

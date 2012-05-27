@@ -32,7 +32,7 @@
 class jstest extends CI_Controller {
 	const TESTPATH = '/js-test/tests/';
 	private $allTests = array(
-		'helpers.js'
+		'helpers/helpersTest.html'
 	);
 
   /**
@@ -45,7 +45,7 @@ class jstest extends CI_Controller {
   }
 
 	function index() {
-		$this->load->view('js-test.php', array(
+		$this->load->view('ss/js-test.php', array(
 			'testsPath' => self::TESTPATH, 
 			'allTests' => $this->allTests
 		));

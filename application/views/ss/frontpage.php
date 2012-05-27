@@ -3,7 +3,7 @@ $ci = get_instance();
 $headerVars = array (
   // pass any custom logic here or data required for header and footer
 );
-$ci->load->view('header', $headerVars);
+$ci->load->view('ss/header', $headerVars);
 ?>
 <div id="master">
 <div id="header">
@@ -47,5 +47,5 @@ echo 'AB Test name:' . $abString . ' Version #' . $abVersion;
 </div>
 </div>
 <?php
-  $ci->load->view('footer', $headerVars);
+  $ci->load->view('ss/footer', $headerVars);
 ?>
