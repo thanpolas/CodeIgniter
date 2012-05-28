@@ -13,21 +13,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * 
+ *
+ *
  * @copyright  (C) 2000-2010 Athanasios Polychronakis - All Rights Reserved
  * @author Athanasios Polychronakis <thanpolas@gmail.com>
  *
  * Core file for initializing needed variables, constants
  * and functionality.
- * 
+ *
  *
  */
 
 // make CI happy with a class declaration
 class SSCore {
 	private static $_isFirstTime = false;
-	
+
 	/**
 	 * Get or set is first time visitor (new session)
 	 *
@@ -38,7 +38,7 @@ class SSCore {
 	{
 		if (is_null($setValue))
 			return self::$_isFirstTime;
-			
+
 		self::$_isFirstTime = $setValue;
 	}
 }
@@ -140,7 +140,6 @@ try {
   // check if user is authed
   if ($ci->user->isAuthed()) {
     // user is authed
-
     $ci->main->JsPass(102, $ci->user->get_public());
     /**
      * Insert random events here
@@ -272,9 +271,11 @@ try {
     }
   }
 
-  // pass the metadata object...
-  $ci->load->model('core/metadata');
-	$ci->metadata->JsPass();
+  // pass the metadata object if not logged in
+  if (!$ci->user->isAuthed()) {
+    $ci->load->model('core/metadata');
+  	$ci->metadata->JsPass();
+	}
 
 
 } catch (Exception $e) {

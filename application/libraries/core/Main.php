@@ -14,8 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * 
+ *
+ *
  * @copyright  (C) 2000-2010 Athanasios Polychronakis - All Rights Reserved
  * @author Athanasios Polychronakis <thanpolas@gmail.com>
  *
@@ -135,7 +135,7 @@ class Main {
 
     foreach ($this->JsPassArray as $k => $val) {
       $json = $this->ci->ajax->GetResult($val, 'json');
-      $out .= '{"action":"' . $k . '","obj":' . $json . '},';
+      $out .= '{"nameId":"' . $k . '","value":' . $json . '},';
 
       //echo "\n\n Key: $k val: $val json: $json \n\n";
     } // foreach
@@ -146,7 +146,7 @@ class Main {
     if ($opt_framed) {
       $out .= 'window.top.window.';
     }
-    $out.= 'ss.tagLander(params);';
+    $out.= 'ss.server(params);';
     //close anon func and script tag
     $out .= '})();</script>';
 

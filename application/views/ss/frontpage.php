@@ -2,6 +2,7 @@
 $ci = get_instance();
 $headerVars = array (
   // pass any custom logic here or data required for header and footer
+  'doNotLoadScripts' => false
 );
 $ci->load->view('ss/header', $headerVars);
 ?>

@@ -14,8 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * 
+ *
+ *
  * @copyright  (C) 2000-2010 Athanasios Polychronakis - All Rights Reserved
  * @author Athanasios Polychronakis <thanpolas@gmail.com>
  *
@@ -146,7 +146,7 @@ class metadata extends CI_Model {
 	{
 			$metadataRoot = $this->getMetadata();
 			if ($metadataRoot['permId'])
-		  	$this->main->JsPass('metadataRoot', $metadataRoot);
+		  	$this->main->JsPass('metadata', $metadataRoot);
 	}
 
   /**
@@ -184,7 +184,7 @@ class metadata extends CI_Model {
    *
    * Re-compile it (the metadataRoot) and store it in our session
    *
-   * @param array|string $metadata [optional] visitor's metadata 
+   * @param array|string $metadata [optional] visitor's metadata
    * @return array (metadataRoot)
    */
   public function updateData($metadata = array())

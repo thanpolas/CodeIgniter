@@ -51,7 +51,7 @@ class User extends CI_Model {
       'firstAuthSourceId' => 0, // the first auth source of the user (entry point)
       'loginCounter' => 0,
       'metadata' => '',
-      'metadataObject' => array(),
+      'metadataRoot' => array(),
       'campaignSource' => '',
       'ab_test' => '',
       // optionaly, if user Has an external authentication source
@@ -586,14 +586,12 @@ class User extends CI_Model {
    * that we write on the right object (user / users)
    * whatever the calee passes
    *
-   * @author Thanasis Polychronakis <thanasisp@gmail.com>
    * @param array $user By reference the user object we want to fill
    * @param array $res The DB result
    * @return void
    */
-  private function _assignUser(&$user, $res) {
-
-
+  private function _assignUser(&$user, $res)
+  {
     $user['userId'] = (int) $res['userId'];
     $user['nickname'] = $res['nickname'];
     $user['fullname'] = $res['real_name'];
@@ -607,7 +605,7 @@ class User extends CI_Model {
     $user['newNotifications'] = (int) $res['new_notifications'];
     $user['newNotificationsData'] = unserialize($res['new_notifications_data']);
     $user['settings'] = unserialize($res['settings_data']);
-    $user['metadata'] = $res['metadata'];
+    $user['metadata'] =  $res['metadata'];
 
     // check if settings where filled correctly (had data)
     if (false === $user['settings']) {
@@ -616,58 +614,7 @@ class User extends CI_Model {
 
     }
     return;
-    /**
-     * The full monty as seen in geowarp
-     *
-     * Only for reference reasons, delete after Aug 2011
-     *
-     *
 
-      $user['password'] = $res['Password'];
-      $user['timezone'] = $res['Timezone'];
-      $user['verified'] = (0 == $res['Verified'] ? false : true);
-      $user['loginAttempts'] = $res['LoginAttempts'];
-      $user['disabled'] = (0 == $res['Disabled'] ? false : true);
-      $user['disabledReason'] = $res['DisabledReason'];
-      $user['email'] = $res['Email'];
-      $user['fullname'] = $res['Fullname'];
-      $user['createDate'] = dttz($res['CreateDate']);
-      $user['lastLoginDate'] = dttz($res['LastLoginDate']);
-      $user['lastLoginIp'] = $res['LastLoginIp'];
-
-      $user['userPrivate'] = (0 == $res['UserPrivate'] ? false : true);
-      $user['userDataRaw'] = $res['UserData'];
-      $user['userData'] = $res['UserDataResolved'];
-
-      $user['emailVerified'] = (0 == $res['EmailVerified'] ? false : true);
-      $user['firstSourceCoreId'] = $res['FirstSourceCoreId'];
-      $user['hasNativeAccount'] = (0 == $res['HasNativeAccount'] ? false : true);
-      $user['hasExtSource'] = (0 == $res['HasExtSource'] ? false : true);
-      $user['locale'] = $res['Locale'];
-
-      $user['details'] = array(
-      'homepage' => $res['Homepage'],
-      'location' => $res['Location'],
-      'userBio' => $res['UserBio'],
-      'hits' => (int) $res['hits']
-      );
-
-
-
-
-      $user['photo'] = array(
-      'photoId' => $res['UserPhotoId'],
-      'url' => ($res['Filename'] ? __WEB_DIR_ABS_PHOTOS_USERS . $res['DirectoryCounter'] . $res['Filename'] : PHOTO_NOPHOTO_USER_BIG),
-      'width' => ((int) $res['Width'] ? (int) $res['Width'] : 73),
-      'height' => ((int) $res['Height'] ? (int) $res['Height'] : 73),
-      'tUrlBig' => ($res['Filename'] ? __WEB_DIR_ABS_PHOTOS_USERS . $res['tDirectoryCounter'] . $res['tFilename1'] : PHOTO_NOPHOTO_USER_BIG),
-      'tUrlNormal' => ($res['Filename'] ? __WEB_DIR_ABS_PHOTOS_USERS . $res['tDirectoryCounter'] . $res['tFilename2'] : PHOTO_NOPHOTO_USER_NORMAL),
-      'tUrlMini' => ($res['Filename'] ? __WEB_DIR_ABS_PHOTOS_USERS . $res['tDirectoryCounter'] . $res['tFilename3'] : PHOTO_NOPHOTO_USER_MINI),
-      'tUrlProfile' => ($res['Filename'] ? __WEB_DIR_ABS_PHOTOS_USERS . $res['tDirectoryCounter'] . $res['tFilename4'] : PHOTO_NOPHOTO_USER_LARGE)
-      );
-     *
-     */
-    // method _assignUser()
   }
 
   /**
@@ -723,8 +670,6 @@ class User extends CI_Model {
     }
 
     return;
-
-    // method _loadExtSources()
   }
 
 
@@ -871,7 +816,6 @@ class User extends CI_Model {
    * that additional cleaning by setting the optional parameter
    * opt_third_party to true
    *
-   * @author Thanasis Polychronakis <thanasisp@gmail.com>
    * @param array $opt_userObj [optional] Supply a user object to parse. Default is authed user
    * @param boolean $opt_third_party [optional] If we will expose a data object to a third party (user)
    * @return array|false User's data object or false if fail
@@ -890,7 +834,6 @@ class User extends CI_Model {
         $user = & $this->userDataPublic;
       }
     }
-
 
     // check if $user is a single or multy data object
     if (isset($user['disabled'])) {
@@ -913,7 +856,7 @@ class User extends CI_Model {
         unset($user['loginCounter']);
         unset($user['disabled']);
         unset($user['loginCounter']);
-        unset($user['metadataObject']);
+        unset($user['metadataRoot']);
       }
 
 
@@ -950,7 +893,7 @@ class User extends CI_Model {
           unset($user[$key]['loginCounter']);
           unset($user[$key]['newNotifications']);
           unset($user[$key]['newNotificationsData']);
-          unset($user[$key]['metadataObject']);
+          unset($user[$key]['metadataRoot']);
         }
 
         // check for external sources and remove sensitive fields
@@ -983,7 +926,6 @@ class User extends CI_Model {
    *  - userId
    *  - nickname
    *  - email
-   * @author Thanasis Polychronakis <thanasisp@gmail.com>
    *
    * @param mixed $what
    * @return string
@@ -1074,7 +1016,6 @@ class User extends CI_Model {
 
       // secure from infinite (?!) loop
       if (100 < $counter) {
-        //logEvent(1023, 0, 'Reached 100 attempts to get a NEW NICKNAME. Quiting');
         raise_error('Something failed, please retry', 'Failed to get a Unique new nickname');
         return false;
       }
@@ -1221,10 +1162,9 @@ class User extends CI_Model {
       case SOURCE_FB:
         $insert['extUserId'] = $userData['id'];
         $insert['extVerified'] = ($userData['verified'] ? 1 : 0);
-        $insert['extUrl'] = $userData['link']; //sq($eye_db->SecureSQLInject($clsSession->clsfb->getProfileUrl()));
+        $insert['extUrl'] = $userData['link'];
         $insert['extUsername'] = $userData['name'];
         $insert['extDataObject'] = serialize($userData);
-        //$insert['ExtUsername'] = sq($clsSession->clsfb->);
         $insert['extProfileImageUrl'] = $userData['profileImageUrl'];
 
         break;
@@ -1249,33 +1189,11 @@ class User extends CI_Model {
         break;
     }
 
-    //print_r($insert);
-
     $this->db->set('createDatetime', 'now()', false);
     if (!$this->db->insert('users_source', $insert)) {
-      raise_error('An error occured, please retry', 'On Insert for user model._saveUserSource users_source');
-      //$eye_db->SQLLog('#1800::On Insert for UserDataEngine.SaveUserSource user_source');
+      raise_error('An error occurred, please retry', 'On Insert for user model._saveUserSource users_source');
       return false;
     }
-
-    /**
-     * For facebook or twitter we also update the has ext source
-     *
-     * Not yet, we only support FB/TW anyway...
-     *
-    if ($sourceId <> SOURCE_WEB && $sourceId <> SOURCE_MOB) {
-
-      // update the main user table as well
-      $update = array(
-          'hasExtSource' => 1
-      );
-      if (!$eye_db->UpdateArray('user', $update, 'UserId = ' . $userId)) {
-        $Err->err(40, $this->lang['register']['fail'], 'DB Error #1801');
-        $eye_db->SQLLog('#1801::On Update for UserDataEngine.SaveUserSource user');
-        return false;
-      }
-     *
-     */
 
       // update the user data object with the
       // new data now...
@@ -1380,7 +1298,7 @@ class User extends CI_Model {
 
     // notify metadata model
     $this->load->model('core/metadata');
-    $this->userData['metadataObject'] = $this->metadata->updateData($this->userData['metadata']);
+    $this->userData['metadataRoot'] = $this->metadata->updateData($this->userData['metadata']);
 
     // save the metrics
     $this->load->model('core/metrics');
