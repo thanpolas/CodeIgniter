@@ -22,9 +22,9 @@ class Fb {
         [name] => Than Polas
         [first_name] => Than
         [last_name] => Polas
-        [link] => http://www.facebook.com/profile.php?id=817295129
-        [bio] => I am the bright lighthouse of reality *** REQUIRES EXTRA PERM
-        [email] => babbos@gmail.com *** REQUIRES EXTRA PERM
+        [link] => http://www.facebook.com/profile.php?id=9999999
+        [bio] => user bio *** REQUIRES EXTRA PERM
+        [email] => user@email.com *** REQUIRES EXTRA PERM
         [timezone] => 3
         [locale] => en_US
         [verified] => 1 *** Does not exist in every account! There's an issue here

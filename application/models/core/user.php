@@ -183,9 +183,9 @@ class User extends CI_Model {
    * We do not honor the privacy bit here, check it in the application
    * method level.
    *
-   * We store the result[s] in $this->$userDataReq object
+   * We store the result[s] in $this->userDataReq object
    *
-   * Optionaly we may request this method to work for
+   * Optionally we may request this method to work for
    * user authentication purposes. In this case we store at
    * $this->userData
    *
@@ -286,12 +286,12 @@ class User extends CI_Model {
         // nothing, already done above
         break;
       case SOURCE_FB:
-        $this->db->join('users_source', 'users_source.userId = users.userId AND users_source.authSourceId = ' . SOURCE_FB, 'left');
+        $this->db->join('users_source', 'users_source.userId = users.userId AND users_source.authSourceId = ' . sq(SOURCE_FB), 'left');
         $query_what = 'users_source.extUserId';
         break;
 
       case SOURCE_TWIT:
-        $this->db->join('users_source', 'users_source.userId = users.userId AND users_source.authSourceId = ' . SOURCE_TWIT, 'left');
+        $this->db->join('users_source', 'users_source.userId = users.userId AND users_source.authSourceId = ' . sq(SOURCE_TWIT), 'left');
         $query_what = 'users_source.extUserId';
         break;
     }

@@ -15,11 +15,7 @@ class Users extends CI_Controller {
    */
   function __construct() {
     parent::__construct();
-
-
     $this->load->helper('url');
-
-    // $this->load->scaffolding('users');
   }
 
   /**
@@ -29,28 +25,6 @@ class Users extends CI_Controller {
   public function index() {
     // do nothing
     return;
-
-
-//	if (!is_logged()) {
-//	    redirect('users/login');
-//	}
-//	//Get the user id
-    //Load a home view
-    $user = get_user();
-
-//	$this->load->view('users/home', array('user'=>$user));
-
-
-    $this->load->model('chat_model');
-
-    $data['result'] = $this->chat_model->getData();
-
-
-    $data['page_title'] = "CI Chat World !";
-    $data['someone'] = $this->chat_model->getSessionID();
-    $data['user'] = $user;
-
-    //$this->load->view('users/home', array('user'=>$user));
   }
 
   /**
@@ -124,13 +98,21 @@ class Users extends CI_Controller {
 
 
   /**
-   * Logs user in with facebook
-   *
+   * Logs user in with an external source (for now only FB)
    *
    */
-  public function facebook()
+  public function extAuth()
   {
-
+    $sourceId = $this->input->get('sourceId');
+    switch($sourceId) {
+      case SOURCE_FB:
+      
+      break;
+      
+      default:
+        raise_error('Something failed, please retry', 'Invalid sourceId parameter');
+      break;
+    }
     $this->load->library('core/User/fb');
 
     if (!$this->fb->is_connected()) {
@@ -260,27 +242,6 @@ class Users extends CI_Controller {
     redirect(base_url() . $uri);
     return;
 
-    /**
-     *
-     *
-     * Depricated code, remove after Aug 2011
-     *
-     *
-      $this->user->set_twitter_id($tw_user->id_str);
-      $user = $this->user->get_by_twitter();
-      if (!empty($user) && !empty($user->id) && is_numeric($user->id)) {
-        //TODO: Make things a bit more secure here
-        $this->_login($user->id, 'twitter');
-        $this->load->view('users/redirect_home');
-      }
-      //redirect('');
-    }
-    //Go to the registration page, we need the concent of the user before proceeding.
-    $this->load->view('users/redirect', array('method' => 'twitter'));
-
-    */
-
-  // method twitter()
   }
 
 

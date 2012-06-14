@@ -89,10 +89,10 @@ require __DIR_PROJECT_ROOT . '/engine/bin/99.prodcounter_do_not_run.php';
      * and Authentication authoritative sources
      *
      */
-    define ('SOURCE_WEB', 1);
-    define ('SOURCE_MOB', 2);
-    define ('SOURCE_FB' , 5);
-    define ('SOURCE_TWIT', 6);
+    define ('SOURCE_WEB', 'NATIVE');
+    define ('SOURCE_MOB', 'Mobile');
+    define ('SOURCE_FB' , 'Facebook');
+    define ('SOURCE_TWIT', 'Twitter');
 
 
 
