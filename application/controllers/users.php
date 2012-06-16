@@ -103,7 +103,7 @@ class Users extends CI_Controller {
    */
   public function extAuth()
   {
-    $sourceId = $this->input->get('sourceId');
+    $sourceId = $this->input->post('sourceId');
     switch($sourceId) {
       case SOURCE_FB:
       
@@ -148,10 +148,11 @@ class Users extends CI_Controller {
 
     // login success, send the user his/her data object
     $return = array('user' => $this->user->get_public());
-    if ($newuser)
+    if ($newuser) {
       $return['newuser'] = true;
+    }
 
-
+    $return['status'] = true;
     
     die_json($return);
     return;

@@ -41,7 +41,7 @@ class MY_Exceptions extends CI_Exceptions {
    */
   public function ajax_error($message)
   {
-    die(_json_encode(array('error' => $message)));
+    die(_json_encode(array('status' => false, 'error' => $message)));
   }
 
 
