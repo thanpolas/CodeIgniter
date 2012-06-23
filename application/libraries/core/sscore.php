@@ -75,11 +75,6 @@ else
 
 require APPPATH . '/libraries/core/valid.class.php';
 
-// require our production counter for .css and .js master files
-require __DIR_PROJECT_ROOT . '/engine/bin/99.prodcounter_do_not_run.php';
-
-
-
 
     /**
      *

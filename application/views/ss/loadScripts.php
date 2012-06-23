@@ -7,8 +7,11 @@ if (DEVEL && !$this->config->item('load_compiled_js')):
 ?>
 <script src="/js/third-party/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="/js/closure-library/closure/goog/base.js" charset="utf-8"></script>
-<script type="text/javascript" src="/js/deps.js" charset="utf-8"></script>
-<script type="text/javascript" src="/js/init.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/deps-ss.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/deps-showcase.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">goog.require('showcase');</script>
+
+
 <?php elseif (DEVEL && $this->config->item('load_compiled_js')): ?>
 	<script type="text/javascript" src="/js/third-party/jquery-1.7.1.js"></script>
 	<script type="text/javascript" src="/jsc/compiled.js" charset="utf-8"></script>
