@@ -106,9 +106,9 @@ class Users extends CI_Controller {
     $sourceId = $this->input->post('sourceId');
     switch($sourceId) {
       case SOURCE_FB:
-      
+
       break;
-      
+
       default:
         raise_error('Something failed, please retry', 'Invalid sourceId parameter');
       break;
@@ -153,7 +153,7 @@ class Users extends CI_Controller {
     }
 
     $return['status'] = true;
-    
+
     die_json($return);
     return;
   }
